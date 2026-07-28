@@ -107,3 +107,8 @@ void vec3_print(vec3 v)
 {
     printf("(%.1f, %.1f, %.1f)\n", v.x, v.y, v.z);
 }
+
+void vec4_print(vec4 v)
+{
+    printf("(%.1f, %.1f, %.1f, %.1f)\n", v.x, v.y, v.z, v.w);
+}
