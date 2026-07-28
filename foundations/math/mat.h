@@ -7,6 +7,7 @@ typedef struct { float m[16]; } mat4;
 
 mat4 mat4_identity(void);
 vec4 mat4_mul_vec4(mat4 M, vec4 v);
+mat4 mat4_mul(mat4 A, mat4 B);
 void mat4_print(mat4 matrix);
 
 #endif

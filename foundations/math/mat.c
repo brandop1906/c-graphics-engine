@@ -26,6 +26,21 @@ vec4 mat4_mul_vec4(mat4 M, vec4 v)
     return result;
 }
 
+mat4 mat4_mul(mat4 A, mat4 B)
+{
+    mat4 result;
+    for (int c = 0; c < 4; c++)
+    {
+        for (int r = 0; r < 4; r++)
+        {
+            float sum = A.m[r] * B.m[c * 4] + A.m[r + 4] * B.m[c * 4 + 1]
+                + A.m[r + 8] * B.m[c * 4 + 2] + A.m[r + 12] * B.m[c * 4 + 3];
+            result.m[c * 4 + r] = sum;
+        }
+    }
+    return result;
+}
+
 void mat4_print(mat4 matrix)
 {
     for (int r = 0; r < 4; r++)
