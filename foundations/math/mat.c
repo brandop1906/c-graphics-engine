@@ -41,6 +41,37 @@ mat4 mat4_mul(mat4 A, mat4 B)
     return result;
 }
 
+mat4 mat4_scale(float sx, float sy, float sz)
+{
+    mat4 result = mat4_identity();
+    result.m[0] = sx;
+    result.m[5] = sy;
+    result.m[10] = sz;
+    result.m[15] = 1.0;
+    return result;
+}
+
+mat4 mat4_translate(float tx, float ty, float tz)
+{
+    mat4 result = mat4_identity();
+    result.m[12] = tx;
+    result.m[13] = ty;
+    result.m[14] = tz;
+    return result;
+}
+
+mat4 mat4_rotate_z(float radians)
+{
+    mat4 result = mat4_identity();
+    float c = cosf(radians);
+    float s = sinf(radians);
+    result.m[0] = c;
+    result.m[1] = s;
+    result.m[4] = -s;
+    result.m[5] = c;
+    return result;
+}
+
 void mat4_print(mat4 matrix)
 {
     for (int r = 0; r < 4; r++)

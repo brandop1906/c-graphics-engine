@@ -1,8 +1,8 @@
 # Graphics Engine Foundations
 
-Building a graphics/game engine in C from first principles — starting at the machine level and working up to a real-time renderer. This repo is the foundation layer taking shape: the math, data structures, and systems groundwork an engine sits on.
+Building a graphics/game engine in C from first principles. Starting at the machine level and working up to a real-time renderer. This repo is the foundation layer taking shape: the math, data structures, and systems groundwork an engine sits on.
 
-The goal isn't to use an existing engine — it's to understand every layer, from memory management up to the rendering pipeline, by building it myself.
+The goal isn't to use an existing engine, it's to understand every layer, from memory management up to the rendering pipeline, by building it myself.
 
 ## Why
 
@@ -44,7 +44,7 @@ gcc -Wall -Wextra -fsanitize=address -g \
 
 - [x] Vector math library (vec2/3/4)
 - [x] Dynamic array
-- [ ] Matrix math (mat3/mat4, transformations)
+- [x] Matrix math (mat3/mat4, transformations)
 - [ ] Quaternions
 - [ ] First triangle (OpenGL)
 - [ ] Basic renderer
