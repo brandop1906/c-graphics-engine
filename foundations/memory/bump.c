@@ -21,7 +21,6 @@ BumpAllocator bump_init(int total_size) {
 
 void *alloc(BumpAllocator *allocator, int size) {
     if (allocator->offset + size > allocator->total_size) {
-        printf("Error!\n");
         return NULL;
     }
     char *local = allocator->buffer + allocator->offset;
