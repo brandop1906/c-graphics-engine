@@ -19,7 +19,7 @@ BumpAllocator bump_init(int total_size) {
     return allocator;
 }
 
-void *alloc(BumpAllocator *allocator, int size) {
+void *bump_alloc(BumpAllocator *allocator, int size) {
     if (allocator->offset + size > allocator->total_size) {
         return NULL;
     }
