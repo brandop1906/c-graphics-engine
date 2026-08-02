@@ -11,6 +11,8 @@ mat4 mat4_mul(mat4 A, mat4 B);
 mat4 mat4_scale(float sx, float sy, float sz);
 mat4 mat4_translate(float tx, float ty, float tz);
 mat4 mat4_rotate_z(float radians);
+mat4 mat4_rotate_y(float radians);
+mat4 mat4_rotate_x(float radians);
 void mat4_print(mat4 matrix);
 
 #endif

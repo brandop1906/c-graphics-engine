@@ -4,3 +4,8 @@ vec3 *vec3_alloc_array(BumpAllocator *allo, size_t count) {
     vec3 *arr = (vec3 *)bump_alloc(allo, count * sizeof(vec3));
     return arr;
 }
+
+vec4 *vec4_alloc_array(BumpAllocator *allo, size_t count) {
+    vec4 *arr = (vec4 *)bump_alloc(allo, count * sizeof(vec4));
+    return arr;
+}

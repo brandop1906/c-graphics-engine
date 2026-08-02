@@ -72,6 +72,30 @@ mat4 mat4_rotate_z(float radians)
     return result;
 }
 
+mat4 mat4_rotate_y(float radians)
+{
+    mat4 result = mat4_identity();
+    float c = cosf(radians);
+    float s = sinf(radians);
+    result.m[0] = c;
+    result.m[2] = -s;
+    result.m[8] = s;
+    result.m[10] = c;
+    return result;
+}
+
+mat4 mat4_rotate_x(float radians)
+{
+    mat4 result = mat4_identity();
+    float c = cosf(radians);
+    float s = sinf(radians);
+    result.m[5] = c;
+    result.m[6] = s;
+    result.m[9] = -s;
+    result.m[10] = c;
+    return result;
+}
+
 void mat4_print(mat4 matrix)
 {
     for (int r = 0; r < 4; r++)

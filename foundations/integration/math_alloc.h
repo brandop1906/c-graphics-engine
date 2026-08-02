@@ -5,4 +5,5 @@
 #include "bump.h"
 
 vec3 *vec3_alloc_array(BumpAllocator *allocator, size_t count);
+vec4 *vec4_alloc_array(BumpAllocator *allocator, size_t count);
 #endif
