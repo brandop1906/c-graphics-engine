@@ -108,6 +108,66 @@ void vec3_print(vec3 v)
     printf("(%.1f, %.1f, %.1f)\n", v.x, v.y, v.z);
 }
 
+vec4 vec4_add(vec4 a, vec4 b)
+{
+    vec4 result;
+    result.x = a.x + b.x;
+    result.y = a.y + b.y;
+    result.z = a.z + b.z;
+    result.w = a.w + b.w;
+    return result;
+}
+
+vec4 vec4_subtract(vec4 a, vec4 b)
+{
+    vec4 result;
+    result.x = a.x - b.x;
+    result.y = a.y - b.y;
+    result.z = a.z - b.z;
+    result.w = a.w - b.w;
+    return result;
+}
+
+vec4 vec4_scale(vec4 a, float scalar)
+{
+    vec4 result;
+    result.x = a.x * scalar;
+    result.y = a.y * scalar;
+    result.z = a.z * scalar;
+    result.w = a.w * scalar;
+    return result;
+}
+
+float vec4_dot(vec4 a, vec4 b)
+{
+    return (a.x * b.x) + (a.y * b.y) + (a.z * b.z) + (a.w * b.w);
+}
+
+float vec4_length(vec4 v)
+{
+    return sqrtf(vec4_dot(v, v));
+}
+
+vec4 vec4_normalize(vec4 v)
+{
+    float len = sqrtf(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
+    if (len == 0.0f)
+        return v;
+    return vec4_scale(v, 1.0f / len);
+}
+
+vec4 vec4_cross(vec4 a, vec4 b)
+{
+    vec4 result;
+    result.x = a.y * b.z - a.z * b.y;
+    result.y = a.z * b.x - a.x * b.z;
+    result.z = a.x * b.y - a.y * b.x;
+    result.w = 0.0f; // The w component is set to 0 for the cross product
+    return result;
+}
+
+
+
 void vec4_print(vec4 v)
 {
     printf("(%.1f, %.1f, %.1f, %.1f)\n", v.x, v.y, v.z, v.w);
