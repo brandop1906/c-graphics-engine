@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <unistd.h>
 #include <stdbool.h>
@@ -18,17 +19,53 @@ float angle_z = (M_PI/4);
 float angle_y = (M_PI/4);
 float angle_x = (M_PI/4);
 char grid[HEIGHT][WIDTH];
+int cols[8];
+int rows[8];
 
 vec4 points[8] = {
-    {1, 1, 1, 1},
-    {1, 1, -1, 1},
-    {1, -1, -1, 1},
-    {-1, -1, -1, 1},
-    {-1, -1, 1, 1},
-    {-1, 1, -1, 1},
-    {-1, 1, 1, 1},
-    {1, -1, 1, 1},
+    {1, 1, 1, 1},   //0
+    {1, 1, -1, 1},  //1
+    {1, -1, -1, 1}, //2
+    {-1, -1, -1, 1},//3
+    {-1, -1, 1, 1}, //4
+    {-1, 1, -1, 1}, //5
+    {-1, 1, 1, 1},  //6
+    {1, -1, 1, 1},  //7
 };
+
+int edges[12][2] = {
+    {0,1}, {0,6}, {0,7},
+    {1,2}, {1,5},
+    {2,3}, {2,7},
+    {3,4}, {3,5}, 
+    {4,6}, {4,7},
+    {5,6},
+};
+
+void draw_line(int col1, int row1, int col2, int row2) {
+    int a = abs(col2 - col1);
+    int b = abs(row2 - row1);
+    int steps = (a > b) ? a : b;
+
+    if (steps == 0) 
+    {
+        if (col1 >= 0 && col1 < WIDTH && row1 >= 0 && row1 < HEIGHT) {
+            grid[row1][col1] = '#';
+        }
+        return;
+    }
+
+    for (int i = 0; i <= steps; i++)
+    {
+        float t = (float)i / steps;
+        int col = col1 + t * (col2 - col1);
+        int row = row1 + t * (row2 - row1);
+        if (col >= 0 && col < WIDTH && row >= 0 && row < HEIGHT) 
+        {
+            grid[row][col] = '#';
+        }
+    }
+}
 
 int main(void) {
     BumpAllocator allo = bump_init(1024);
@@ -76,13 +113,17 @@ int main(void) {
         {
             float x = verts[i].x;
             float y = verts[i].y;
-            int col = (x - min) / (max - min) * (WIDTH - 1);
-            int row = (HEIGHT - 1) - ((y - min) / (max - min) * (HEIGHT - 1));
-            if (col >= 0 && col < WIDTH && row >= 0 && row < HEIGHT)
-            {
-                grid[row][col] = '#';
-            }
+            cols[i] = (x - min) / (max - min) * (WIDTH - 1);
+            rows[i] = (HEIGHT - 1) - ((y - min) / (max - min) * (HEIGHT - 1));
         }
+
+        for (int e = 0; e < 12; e++)
+        {
+            int va = edges[e][0];
+            int vb = edges[e][1];
+            draw_line(cols[va], rows[va], cols[vb], rows[vb]);
+        }
+        
 
         for (int row = 0; row < HEIGHT; row++)
         {
@@ -94,8 +135,8 @@ int main(void) {
         }
 
         angle_z += 0.05;
-        angle_y += 0.07;
-        angle_x += 0.10;
+        angle_y += 0.04;
+        angle_x *= 0.07;
         fflush(stdout);
         usleep(50000);
     
